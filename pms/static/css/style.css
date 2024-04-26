@@ -1,0 +1,444 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.image-container{
+    background: url('images/bg1.jpg') center no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+/* Adjust the positioning of the "User Type" dropdown */
+.user-type {
+    text-align: left;
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.user-type label {
+    display: block;
+    margin-bottom: 5px; /* Adjust as needed */
+}
+
+.user-type select {
+    width: 20%; /* Make the dropdown fill the width */
+    padding: 5px; /* Adjust as needed */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Adjust border styles as needed */
+}
+
+.user-type-label {
+    color: #FFFFFF; /* White color */
+}
+
+
+.form-container{
+    background-color: #555555;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.form-box h4{
+    font-weight: bold;
+    color: #fff;
+}
+/* footer */
+.footer {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 10px;
+}
+
+.form-box .form-input {
+    position: relative;
+}
+
+.form-box .form-input input{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: white;
+    padding-left: 45px;
+}
+
+.form-box .form-input span{
+    position: absolute;
+    top: 8px;
+    padding-left: 20px;
+    color: #777;
+}
+
+.form-box .form-input input::placeholder{
+    padding-left: 0px;
+}
+
+.form-box .form-input input:focus,
+.form-box .form-input input:valid{
+    border-bottom: 2px solid #dc3545;
+}
+
+.form-box input[type="checkbox"]:not(:checked) + label:before{
+    background: transparent;
+    border: 2px solid #fff;
+    width: 15px;
+    height: 15px;
+}
+
+.form-box .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+    background-color: #dc3545;
+    border: 0px;
+}
+
+.form-box button[type="submit"]{
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.form-box button[type="submit"]:hover{
+    -webkit-box-shadow: 0px 9px 10px -2px rgba(0,0,0,0.55);
+    -moz-box-shadow: 0px 9px 10px -2px rgba(0,0,0,0.55);
+    box-shadow: 0px 9px 10px -2px rgba(0,0,0,0.55);
+}
+
+.forget-link, .register-link, .login-link{
+    color: #fff;
+    font-weight: bold;
+}
+
+.forget-link:hover, .register-link:hover, .login-link:hover{
+    color: #292525;
+}
+
+.form-box .btn-social{
+    color: #fff;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.form-box .btn-facebook{
+    background: #4866a8;
+}
+
+.form-box .btn-google{
+    background: #da3f34
+}
+
+.form-box .btn-twitter{
+    background: #33ccff;
+}
+
+.form-box .btn-facebook:hover{
+    color: #fff;
+    background: #3d5785;
+}
+
+.form-box .btn-google:hover{
+    background: #bf3b31;
+    color: #fff;
+}
+
+.form-box .btn-twitter:hover{
+    background: #2eb7e5;
+    color: #fff;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  background: #dfe9f5;
+  margin: 0;
+}
+
+  
+
+
+
+a:hover{
+  background: #a19090;
+}
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+/* Main Section */
+
+.main-top{
+  display: flex;
+  width: 100%;
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+.main-skills{
+  display: flex;
+  margin-top: 20px;
+}
+.main-skills .card{
+  width: 25%;
+  margin: 10px;
+  background: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.main-skills .card h3{
+  margin: 10px;
+  text-transform: capitalize;
+}
+.main-skills .card p{
+  font-size: 12px;
+}
+.main-skills .card button{
+  background: orangered;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.main-skills .card button:hover{
+  background: rgba(223, 70, 15, 0.856);
+}
+.main-skills .card i{
+  font-size: 22px;
+  padding: 10px;
+}
+
+/* Courses */
+.main-course{
+  margin-top:20px ;
+  text-transform: capitalize;
+}
+.course-box{
+  width: 100%;
+  height: 300px;
+  padding: 10px 10px 30px 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.course-box ul{
+  list-style: none;
+  display: flex;
+}
+.course-box ul li{
+  margin: 10px;
+  color: gray;
+  cursor: pointer;
+}
+.course-box ul .active{
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+.course-box .course{
+  display: flex;
+}
+.box{
+  width: 33%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.box p{
+  font-size: 12px;
+  margin-top: 5px;
+}
+.box button{
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+.box button:hover{
+  background: rgba(0, 0, 0, 0.842);
+}
+.box i{
+  font-size: 7rem;
+  float: right;
+  margin: -20px 20px 20px 0;
+}
+.html{
+  color: rgb(25, 94, 54);
+}
+.css{
+  color: rgb(104, 179, 35);
+}
+.js{
+  color: rgb(28, 98, 179);
+}
+
+  /* CSS styles for the form */
+.main form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.main form input[type="text"],
+.main form input[type="email"],
+.main form input[type="date"],
+.main form select,
+.main form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.main form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.main form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+  
+    .header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+  }
+ /* CSS for footer.html */
+
+footer {
+  position: fixed; /* Position the footer relative to the viewport */
+  left: 0; /* Align the footer to the left edge */
+  bottom: 0; /* Align the footer to the bottom edge */
+  width: 100%; /* Set the width to 100% */
+  background-color: #fff; /* Background color for the footer */
+  color: #fff; /* Text color for the footer */
+  padding: 20px 0; /* Padding for the top and bottom of the footer */
+}
+
+.footer-content {
+  max-width: 1200px; /* Maximum width for the content within the footer */
+  margin: 0 auto; /* Center the content horizontally */
+}
+
+.footer-content:after {
+  content: ""; /* Clearfix hack to clear floats */
+  display: table;
+  clear: both;
+}
+
+.footer-bottom {
+  text-align: center; /* Align content in the footer bottom to the center */
+  margin-top: 20px; /* Margin space between the content and the footer bottom */
+}
+
+.footer-bottom p {
+  color: #fff; /* Text color for the footer bottom */
+}
+
+
+
+
+
+/* Sidebar Styles */
+#pms-wrapper .sidebar {
+  background: #333; /* Set the background color of the sidebar to white */
+  color: #fff; /* Set the text color of the sidebar */
+  width: 150px; /* Set the width of the sidebar */
+  padding: 20px; /* Add padding to the sidebar content */
+  position: fixed; /* Position the sidebar */
+  top: 0; /* Align the sidebar 40 pixels below the top */
+  bottom: 0; /* Align the sidebar to the bottom */
+  left: 0;
+  
+}
+#pms-wrapper .sidebar ul {
+  list-style-type: none; 
+  padding: 0; 
+}
+
+#pms-wrapper .sidebar ul li {
+  margin-bottom: 10px; 
+}
+
+#pms-wrapper .sidebar ul li a {
+  color: #ffffff; 
+  text-decoration: none; 
+}
+#pms-wrapper .sidebar ul li a.logo .nav-item {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 35px;
+
+}
+#pms-wrapper .sidebar ul li a .nav-item {
+  font-size: 12px;
+
+}
+/* Sidebar Styles ends here */
+#pms-wrapper {
+  padding-left: 150px;
+}
+#pms-wrapper .main{  
+  padding: 20px;
+  background: #ebebeb;
+}
+
+.w900{
+  --bs-modal-width: 900px !important;
+}
+#applyFormBase{
+  display: none;
+}
+
+

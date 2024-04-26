@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% block content %} 
+<div class="site-heading text-center">
+    <h3 class="font-weight-bold">Study Materials</h3>
+</div>
+
+<div class="formbold-main-wrapper">
+    <div class="w-full">
+        <div class="formbold-form-wrapper" >
+            <table class="table table-striped">
+                <thead class="thead-dark">                    
+                    <tr>
+                        <th>Title</th>
+                        <th>material</th>
+                        <th>links</th>
+                        <th>download materials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contents in content %}
+                            
+                    <tr>
+                        <td>{{ contents.title }}</td>
+                        <td>{{ contents.material }}</td>
+                        <td><a href="{{ contents.links }}">{{ contents.links }}</a></td>
+                        <td>
+                            {% if contents.material %}
+                            <a href="/media/{{contents.material}}"download>Download material</a>
+                            {% else %}
+                            no material available
+                            {% endif %}
+                        </td>
+                       
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                            
+                        
+                       
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+   
+
+{% endblock %}

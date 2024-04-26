@@ -1,0 +1,513 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Inter", sans-serif;
+    }
+
+    .formbold-mb-5 {
+        margin-bottom: 20px;
+    }
+
+    .formbold-pt-3 {
+        padding-top: 12px;
+    }
+
+
+
+    .formbold-form-wrapper {
+        background: white;
+        border: 1px solid #e0e0e0;
+    }
+
+    .formbold-form-wrapper.active {
+        display: block;
+    }
+
+    .formbold-form-label {
+        display: block;
+        font-weight: 500;
+        font-size: 16px;
+        color: #07074d;
+        margin-bottom: 12px;
+    }
+
+    .formbold-form-label-2 {
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .formbold-form-input {
+        width: 100%;
+        padding: 12px 24px;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        background: white;
+        font-weight: 500;
+        font-size: 16px;
+        color: #6b7280;
+        outline: none;
+        resize: none;
+    }
+
+    .formbold-form-input:focus {
+        border-color: #6a64f1;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .formbold-btn {
+        text-align: center;
+        font-size: 16px;
+        border-radius: 6px;
+        padding: 14px 32px;
+        border: none;
+        font-weight: 600;
+        background-color: #6a64f1;
+        color: white;
+        cursor: pointer;
+    }
+
+    .formbold-btn:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .formbold--mx-3 {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+
+    .formbold-px-3 {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .w-full {
+        width: 100%;
+    }
+
+    .formbold-form-header {
+        background: #6a64f1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 36px;
+        border-radius: 8px 8px 0px 0px;
+    }
+
+    .formbold-form-header h3 {
+        font-weight: 700;
+        font-size: 20px;
+        color: white;
+    }
+
+    .formbold-form-header button {
+        color: white;
+        background: transparent;
+        border: none;
+    }
+
+    .formbold-chatbox-form {
+        padding: 32px 36px;
+    }
+
+    @media (min-width: 540px) {
+        .sm\:w-half {
+            width: 50%;
+        }
+    }
+
+
+    /* Add this CSS to style the form rows and columns */
+.formbold-row {
+    display: flex;
+    margin-bottom: 20px; /* Adjust spacing between rows */
+}
+
+.formbold-col {
+    flex: 1;
+    margin-right: 20px; /* Adjust spacing between columns */
+}
+
+/* Clear the margin-right for the last column in each row */
+.formbold-row .formbold-col:last-child {
+    margin-right: 0;
+}
+
+/* Ensure input fields take up full width */
+.formbold-form-input {
+    width: 100%;
+}
+
+/* personal details heading color */
+.formbold-tab {
+    background-color: #6a64f1; /* Blue color */
+    color: white; /* Text color */
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0; /* Rounded corners on top */
+    cursor: pointer;
+    margin-bottom: 0; /* No margin at the bottom */
+    margin-top: -10px; /* Move the heading upwards */
+}
+
+
+/* tenth level heading */
+.formbold-tab {
+    background-color: #6a64f1; /* Blue color */
+    color: white; /* Text color */
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0; /* Rounded corners on top */
+    cursor: pointer;
+    margin-bottom: 0; /* No margin at the bottom */
+    margin-top: -10px; /* Move the heading upwards */
+}
+</style>
+{% extends 'base.html' %}
+{% block content %} 
+<!-- contents here -->
+
+<div class="site-heading text-center">
+    <h3 class="font-weight-bold">Student Profile</h3>
+</div>
+
+
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="w-full">
+        <div class="formbold-form-wrapper" id="formWrapper">
+            
+            <form action="javascript:void(0);" class="formbold-chatbox-form" enctype="multipart/form-data"  id="studentdataForm">
+                {% csrf_token %}
+                
+                <div class="formbold-tab-content">
+                    
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                         <center><h6 class="formbold-form-label formbold-tab">PERSONAL DETAILS </h6></center>   
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="name" class="formbold-form-label">Name</label>
+                            <input type="text" name="name" id="name" placeholder="Name" class="formbold-form-input" value="{{ form.name }}">
+                            <input type="hidden" name="actionItem" id="actionItem" value="{{action}}">
+                            <input type="hidden" name="student_id" id="student_id" value="{{ form.student_id }}"> 
+                        </div>
+                        <div class="formbold-row">
+                            <div class="formbold-col">
+                                <label for="email" class="formbold-form-label">Email</label>
+                                <input type="email" name="email" id="email" placeholder="example@gmail.com" class="formbold-form-input" value="{{ form.email }}">
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="course" class="formbold-form-label">Course</label>
+                            <input type="text" name="course" id="course" placeholder="Course" class="formbold-form-input" value="{{ form.course }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="ph_no" class="formbold-form-label">Phone Number</label>
+                            <input type="tel" name="ph_no" id="ph_no" placeholder="Phone Number" class="formbold-form-input" value="{{ form.ph_no }}">
+                        </div>
+                    </div>
+                    
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="dob" class="formbold-form-label">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" placeholder="Date of Birth" class="formbold-form-input" value="{{ form.dob }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="gender" class="formbold-form-label">Gender</label>
+                            <select name="gender" id="gender" class="formbold-form-input" >
+                                <option value="male" {% if form.gender == 'male' %} selected {% endif %}>Male</option>
+                                <option value="female" {% if form.gender == 'female' %} selected {% endif %}>Female</option>
+                                <option value="other" {% if form.gender == 'other' %} selected {% endif %}>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="nationality" class="formbold-form-label">Nationality</label>
+                            <input type="text" name="nationality" id="nationality" placeholder="Nationality" class="formbold-form-input" value="{{ form.nationality }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="religion" class="formbold-form-label">Religion</label>
+                            <input type="text" name="religion" id="religion" placeholder="Religion" class="formbold-form-input" value="{{ form.religion}}">
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="caste" class="formbold-form-label">Caste</label>
+                            <input type="text" name="caste" id="caste" placeholder="Caste" class="formbold-form-input" value="{{ form.caste }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="blood_group" class="formbold-form-label">Blood Group</label>
+                            <input type="text" name="blood_group" id="blood_group" placeholder="Blood Group" class="formbold-form-input" value="{{ form.blood_group }}">
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="address" class="formbold-form-label">Address</label>
+                            <input type="text" name="address" id="address" placeholder="Address" class="formbold-form-input" value="{{ form.address }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="city" class="formbold-form-label">City</label>
+                            <input type="text" name="city" id="city" placeholder="City" class="formbold-form-input" value="{{ form.city }}">
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="state" class="formbold-form-label">State</label>
+                            <input type="text" name="state" id="state" placeholder="State" class="formbold-form-input" value="{{ form.state }}">
+                        </div>
+                        <!-- links -->
+                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+                    <!-- select2 CSS -->
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet">
+                    <!-- select2-bootstrap4-theme -->
+                    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
+                        <!-- skills mutliple data -->
+                        <div class="formbold-mb-5">
+                            <label class="formbold-form-label">Skills</label>
+                            <select name="skills" id="skills" multiple placeholder="Choose skills" data-allow-clear="1" class="formbold-form-input">
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JavaScript</option>
+                                <option>PHP</option>
+                                <option>AWS</option>
+                                <option>MySQL</option>
+                                <option>PYTHON</option>
+                                <option>JAVA</option>
+                                <option>SPRING BOOT</option>
+                                <option>C++</option>
+                                <option>DJANGO</option>
+                                <option>RUBY</option>
+                                <option>NODE.JS</option>
+                                <option>PostgreSQL</option>
+                                <option>MongoDB</option>
+                                <option>KOTLIN</option>
+                                <option>FLASK</option>
+                                <option>C#</option>
+                                
+
+                                
+                               
+                            
+                                
+
+                               
+
+
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                         <center><h6 class="formbold-form-label formbold-tab">TENTH LEVEL </h6></center>   
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="reg_no_10" class="formbold-form-label">Registration Number (10th)</label>
+                            <input type="text" name="reg_no_10" id="reg_no_10" placeholder="Registration Number (10th)" class="formbold-form-input" value="{{ form.reg_no_10 }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="school_name_10" class="formbold-form-label">School Name (10th)</label>
+                            <input type="text" name="school_name_10" id="school_name_10" placeholder="School Name (10th)" class="formbold-form-input" value="{{ form.school_name_10 }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="passout_yr_10" class="formbold-form-label">Year of Passing (10th)</label>
+                            <input type="text" name="passout_yr_10" id="passout_yr_10" placeholder="Year of Passing (10th)" class="formbold-form-input" value="{{ form.passout_yr_10 }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="mark_10" class="formbold-form-label">Marks (10th)</label>
+                            <input type="text" name="mark_10" id="mark_10" placeholder="Marks (10th)" class="formbold-form-input" value="{{ form.mark_10 }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                         <center><h6 class="formbold-form-label formbold-tab">TWELVETH LEVEL </h6></center>   
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="reg_no_12" class="formbold-form-label">Registration Number (12th)</label>
+                            <input type="text" name="reg_no_12" id="reg_no_12" placeholder="Registration Number (12th)" class="formbold-form-input" value="{{ form.reg_no_12 }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="school_name_12" class="formbold-form-label">School Name (12th)</label>
+                            <input type="text" name="school_name_12" id="school_name_12" placeholder="School Name (12th)" class="formbold-form-input" value="{{ form.school_name_12 }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="passout_yr_12" class="formbold-form-label">Year of Passing (12th)</label>
+                            <input type="text" name="passout_yr_12" id="passout_yr_12" placeholder="Year of Passing (12th)" class="formbold-form-input" value="{{ form.passout_yr_12 }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="stream" class="formbold-form-label">Stream</label>
+                            <input type="text" name="stream" id="stream" placeholder="Stream" class="formbold-form-input"  value="{{  form.stream }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="percentage_12" class="formbold-form-label">Percentage (12th)</label>
+                            <input type="text" name="percentage_12" id="percentage_12" placeholder="Percentage (12th)" class="formbold-form-input"  value="{{ form.percentage_12 }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                         <center><h6 class="formbold-form-label formbold-tab">DEGREE LEVEL </h6></center>   
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="graduation_university_Reg_no" class="formbold-form-label">University Registration Number (Graduation)</label>
+                            <input type="text" name="graduation_university_Reg_no" id="graduation_university_Reg_no" placeholder="University Registration Number (Graduation)" class="formbold-form-input"  value="{{ form.graduation_university_Reg_no }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="graduated_college_name" class="formbold-form-label">College Name (Graduation)</label>
+                            <input type="text" name="graduated_college_name" id="graduated_college_name" placeholder="College Name (Graduation)" class="formbold-form-input"  value="{{ form.graduated_college_name }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="graduated_branch" class="formbold-form-label">Branch (Graduation)</label>
+                            <input type="text" name="graduated_branch" id="graduated_branch" placeholder="Branch (Graduation)" class="formbold-form-input"  value="{{ form.graduated_branch }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="graduated_passout_yr" class="formbold-form-label">Year of Passing (Graduation)</label>
+                            <input type="text" name="graduated_passout_yr" id="graduated_passout_yr" placeholder="Year of Passing (Graduation)" class="formbold-form-input" value="{{ form.graduated_passout_yr }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="graduated_cgpa" class="formbold-form-label">CGPA (Graduation)</label>
+                            <input type="text" name="graduated_cgpa" id="graduated_cgpa" placeholder="CGPA (Graduation)" class="formbold-form-input" value="{{ form.graduated_cgpa }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="existing_backlogs" class="formbold-form-label">Existing Backlogs</label>
+                            <input type="text" name="existing_backlogs" id="existing_backlogs" placeholder="Existing Backlogs" class="formbold-form-input" value="{{ form.existing_backlogs }}">
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <center><h6 class="formbold-form-label formbold-tab">MASTER'S LEVEL</h6></center>   
+                        </div>
+                    </div>
+
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="masters_university_reg_no" class="formbold-form-label">University Registration Number (Masters)</label>
+                            <input type="text" name="masters_university_reg_no" id="masters_university_reg_no" placeholder="University Registration Number (Masters)" class="formbold-form-input" value="{{ form.masters_university_reg_no }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="masters_college_name" class="formbold-form-label">College Name (Masters)</label>
+                            <input type="text" name="masters_college_name" id="masters_college_name" placeholder="College Name (Masters)" class="formbold-form-input" value="{{ form.masters_college_name }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="masters_branch" class="formbold-form-label">Branch (Masters)</label>
+                            <input type="text" name="masters_branch" id="masters_branch" placeholder="Branch (Masters)" class="formbold-form-input"  value="{{ form.masters_branch }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="masters_passout_yr" class="formbold-form-label">Year of Passing (Masters)</label>
+                            <input type="text" name="masters_passout_yr" id="masters_passout_yr" placeholder="Year of Passing (Masters)" class="formbold-form-input" value="{{ form.masters_passout_yr }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="masters_cgpa" class="formbold-form-label">CGPA (Masters)</label>
+                            <input type="text" name="masters_cgpa" id="masters_cgpa" placeholder="CGPA (Masters)" class="formbold-form-input" value="{{ form.masters_cgpa  }}">
+                        </div>
+                        <div class="formbold-col">
+                            <label for="masters_existing_backlogs" class="formbold-form-label">Existing Backlogs (Masters)</label>
+                            <input type="text" name="masters_existing_backlogs" id="masters_existing_backlogs" placeholder="Existing Backlogs (Masters)" class="formbold-form-input"  value="{{ form.masters_existing_backlogs }}">
+                        </div>
+                    </div>
+                    <div class="formbold-row">
+                        <div class="formbold-col">
+                            <label for="resume" class="formbold-form-label">Resume</label>
+                            <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" class="formbold-form-input">
+                        </div>
+                    </div>
+                    <div>
+                    <button class="formbold-btn w-full" id="submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('studentdataForm').addEventListener('submit',function(evt){
+        var formData = new FormData(document.getElementById('studentdataForm'));
+        // formData.append("action",document.getElementById('actionItem'));
+        console.log(formData);
+        debugger
+
+       
+        
+        $.ajax({
+            url: "{% url 'details' %}",
+            type: 'POST',
+            data : formData,
+            processData:false,
+            contentType:false,
+            cache:false,
+           
+            success: function(response){
+                window.location.replace("{% url 'userdash' %}")
+            },
+            error: function(error){
+            console.log(error)
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("formWrapper").style.display = "block";
+    });
+</script>
+
+<script>
+    $(function () {
+      $('select').each(function () {
+        $(this).select2({
+          theme: 'bootstrap4',
+          width: 'style',
+          placeholder: $(this).attr('placeholder'),
+          allowClear: Boolean($(this).data('allow-clear')),
+        });
+      });
+    });
+  </script>
+  {% endblock %}
+
+

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="site-heading text-center">
+    <h3 class="font-weight-bold">APPLY FOR JOBS</h3>
+</div>
+
+
+<div class="job-list">
+    <div class="row">
+        {% for job in matching_jobs %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ job.applied_job.job_role }}</h5>
+                    <p class="card-text">{{ job.applied_job.company.name }}</p>
+                    <p class="card-text">{{ job.applied_job.company.location }}</p>
+                    <button type="button" id="apply_button" class="btn btn-primary apply-btn" data-student-id="{{ job.applied_student_id.id }}" data-job-id="{{ job.applied_job.id }}">Apply</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+</div>
+<form id ='applyFormBase'>
+{% csrf_token %}
+</form>
+<script>
+
+    var applyBtns = document.querySelectorAll('.apply-btn');
+    applyBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (evt) {
+
+            var studentId = this.getAttribute('data-student-id');
+            var jobId = this.getAttribute('data-job-id');
+            var _formData = new FormData(document.getElementById('applyFormBase'));
+            _formData.append('student_id',studentId)
+            _formData.append('job_id',jobId)
+            var currentButton = this; // Reference to the current button
+
+            $.ajax({
+                url: "{% url 'update_application_status' %}",
+                type: 'POST',
+                data: _formData,
+                cache: false,
+                processData:false,
+                contentType:false,
+                success: function (response) {
+                    if(response.status ==='success'){
+                        Swal.fire({
+                        title: "Applied for the job!",
+                        text: "You have successfully applied for the job.",
+                        icon: "success"
+                    });
+                    // var apply_btn = document.getElementById('apply_button');
+                    // apply_btn.innerHTML="Applied"
+                    // apply_btn.disabled = true;
+                        // alert(jobId);
+                        currentButton.innerHTML = "Applied";
+                        currentButton.disabled = true;
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    Swal.fire({
+                            title: "Error",
+                            text: "Error while updating the data.",
+                            icon: "error"
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+{% endblock %}

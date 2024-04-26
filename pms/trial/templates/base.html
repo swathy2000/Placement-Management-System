@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'asset/css/bootstrap.min.css' %}">
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="{% static 'asset/css/font-awesome.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'asset/css/bootstrap-icons.min.css' %}">
+
+
+    <script src="{% static 'asset/js/jquery.min.js' %}"></script>
+    <script src="{% static 'asset/js/sweetalert2@10.js' %}"></script>
+
+    <script src="{% static 'asset/js/popper.min.js' %}" ></script>
+    <script src="{% static 'asset/js/bootstrap.min.js' %}" ></script>
+    <!-- select2 JS -->
+    <script src="{% static 'asset/js/select2.min.js' %}"></script>
+</head>
+<body>
+    <div id="pms-wrapper" class="">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    {% if request.user.last_name == 'user' %}
+                        <li>
+                            <a href="#" class="logo">
+                                <span class="nav-item">STUDENT PANEL</span>
+                            </a>
+                        </li>
+                        <li><a href="{% url 'userdash' %}"><i class="fas fa-plus"></i><span class="nav-item">Dashboard</span></a></li>
+                        <li><a href="{% url 'details' %}"><i class="fas fa-plus"></i><span class="nav-item">Personal Details</span></a></li>
+                        <li><a href="{% url 'studmaterial' %}"><i class="fas fa-handshake"></i><span class="nav-item">Study Materials</span></a></li>
+                        <li><a href="{% url 'studjoblist' %}"><i class="fas fa-handshake"></i><span class="nav-item">Notification</span></a></li>
+                        
+                     
+                    {% elif request.user.last_name == 'tpc' %}
+                        <li>
+                            <a href="#" class="logo">
+                                <span class="nav-item">TPC PANEL</span>
+                            </a>
+                        </li>
+                        <li><a href="{% url 'tcpdash' %}"><i class="fas fa-poll"></i><span class="nav-item">Dashboard</span></a></li>
+                        <li><a href="{% url 'company' %}"><i class="fas fa-poll"></i><span class="nav-item">Company Details</span></a></li>
+                        <li><a href="{% url 'job_list' %}"><i class="fas fa-handshake"></i><span class="nav-item">Jobs</span></a></li>
+                        <li><a href="{% url 'testyourself' %}"><i class="fas fa-handshake"></i><span class="nav-item">Study Materials</span></a></li>
+                    {% endif %}
+
+                    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i><span class="nav-item">Logout</span></a></li>
+    
+                </ul>
+            </nav>
+        </aside>
+        
+
+        <section class="main">
+            
+            {% block content %} 
+            <!-- contents here -->
+            
+            {% endblock %}
+        </section>
+    </div>
+   
+</body>
+</html>

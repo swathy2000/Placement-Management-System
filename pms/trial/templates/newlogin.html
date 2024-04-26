@@ -1,0 +1,51 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-container">
+                <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
+                    <div class="heading mb-3">
+                        <h4>Login into your account</h4>
+                        
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-input">
+                            <span><i class="fa fa-envelope"></i></span>
+                           <input type="text" placeholder="Username"  name="username" value="" required>
+                        </div>
+                        
+                        <div class="form-input">
+                            <span><i class="fa fa-lock"></i></span>
+                             <input type="password" placeholder="Password"  name="password" value="" required>
+                        </div>
+                        <div class="text-left mb-3">
+                            <center><button type="submit" class="btn">Login</button></center>
+                        </div>
+                        
+                        <div class="text-white">Don't have an account?
+                        <a href="{% url 'registration' %}" class="register-link">Register here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 d-none d-md-block">
+                <img src="{% static 'images/bg1.jpg' %}" alt="Background Image">
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

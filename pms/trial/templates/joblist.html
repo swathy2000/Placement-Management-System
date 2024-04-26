@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="site-heading text-center">
+    <h3 class="font-weight-bold">JOB LIST</h3>
+</div>
+<div style="text-align: right;">
+    <button onclick="window.location.href='{% url 'jobof' %}'" class="btn btn-success mb-2">Add Job</button>
+</div>
+<div id="jobform"></div>
+<div class="modal modal-lg w900 fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle" style="text-align: center;"></h5>ELIGIBLE
+                CANDIDATES FOR JOB</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="studentList"> <!-- Placeholder for displaying student IDs -->
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Skill</th>
+                                <th>Ph_no</th>
+                                <th>Attendence Status</th>
+                                <th>Placement Status</th>
+                                <th>Shortlisted Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="studentIdsList">
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped" id="joblist_id">
+    <thead>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Eligibility</th>
+        <th>Skills</th>
+        <th>Status</th>
+        <th>Action</th>
+
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.company }}</td>
+            <td>{{ job.job_role }}</td>
+            <td>{{ job.eligibility }}</td>
+            <td>{{ job.skills }}</td>
+            <td>{{ job.status }}</td>
+            <td><button type="button" class="example" value="{{ job.id }}" data-toggle="modal"
+                    data-target="#exampleModalCenter" style="margin-right: 10px;"><i class="bi bi-people-fill" style="font-size: 24px;"></i></button>
+                <a href="{% url 'jobof' %}?job_id={{ job.id }}&action=E" data-jobid="{{ job.id }}" action="E"
+                    class="btn btn-primary btn-sm" style="background-color: black; color: white;">
+                    <i class="bi bi-pencil-square" style="color: white;"></i> Edit
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    var ids = document.querySelectorAll('.example')
+    ids.forEach(row => {
+        row.addEventListener('click', function (evt) {
+            console.log("ID is", row.value);
+            var jobID = row.value;
+            var formData = new FormData();
+            formData.append('job_id', jobID);
+            debugger
+            $.ajax({
+                url: "{% url 'match' %}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+
+
+                success: function (response) {
+                    var data = response
+                    var table = document.getElementById('studentIdsList');
+                    table.innerHTML = ''; // Clear existing table content
+
+                    var tString = "";
+                    debugger;
+                    data.forEach(function (dict) {
+                        tString += "<tr>"
+                        tString += '<td>' + dict.name + '</td>'
+                        tString += '<td>' + dict.email + '</td>'
+                        tString += '<td>' + dict.skills + '</td>'
+                        tString += '<td>' + dict.ph_no + '</td>'
+                        tString += '<td>' ;
+                            //attendence toggler
+                        if (dict.placement.status === 'N'){
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input attendence_status_check" t-action="asc" type="checkbox" disabled></div>'
+                        }
+                        else{
+                            if (dict.placement.attendence_status ==='Y'){
+                                tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input attendence_status_check" t-action="asc" type="checkbox" checked></div>'
+                            }else{
+                                tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input attendence_status_check" t-action="asc" type="checkbox"></div>'
+                            }
+                        }
+                        tString+= '</td>'
+                        tString += '<td>' ;
+                            //placement toggler
+                        if (dict.placement.status === 'N'){
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input placement_status_check" t-action="asc" type="checkbox" disabled></div>'
+                        }
+                        else{
+                            if (dict.placement.placement_status ==='Y'){
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input placement_status_check" t-action="psc" type="checkbox" checked></div>'
+                        }else{
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input placement_status_check" t-action="psc" type="checkbox"></div>'
+                        }
+
+                        }
+                       
+
+                        tString+= '</td>'
+                        tString += '<td>' ;
+                            //shortlisted toggler
+                        if (dict.placement.status === 'N'){
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' class="form-check-input shortlisted_status_check" t-action="asc" type="checkbox" disabled></div>'
+                        }
+                        else{
+                            if (dict.placement.shortlisted_status ==='Y'){
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' data-student-id="{{ dict.id }}" class="form-check-input shortlisted_status_check" t-action="ssc" type="checkbox" checked></div>'
+                        }else{
+                            tString+= '<div class="form-check form-switch"><input value='+dict.placement.id+' data-student-id="{{ dict.id }}" class="form-check-input shortlisted_status_check" t-action="ssc" type="checkbox"></div>'
+                        }
+
+                        }
+                       
+
+                        tString+= '</td>'
+
+
+                        
+                        tString += "</tr>"
+                        // Append the row to the table
+
+                    });
+                    // table.appendChild(row);
+                    table.innerHTML = tString;
+                    document.getElementById('studentIdsList').querySelectorAll('.attendence_status_check, .placement_status_check, .shortlisted_status_check').forEach(function(elem , index){
+                        elem.addEventListener('change',function(evt){
+                            var stud_att_id = elem.getAttribute('value')
+                            var stud_att_action = elem.getAttribute('t-action')
+                            var stud_att_value = elem.checked
+
+                            $.ajax({
+                                url: "{% url 'update_stud_attendence' %}", 
+                                method: 'POST',
+                                data: {
+                                    stud_att_id: stud_att_id, 
+                                    stud_att_action: stud_att_action,
+                                    stud_att_value: stud_att_value,
+                                    
+                                },
+                                success: function(response) {
+                                    
+                                    console.log(response.status);
+                                },
+                                                
+                                                                
+
+                                error: function (error) {
+                                    console.log(error)
+                                }
+                            });
+        });
+
+    });
+},
+            error: function (error) {
+                console.log(error)
+            }
+        });
+    });
+});
+
+
+</script>
+{% endblock %}
